@@ -1,0 +1,86 @@
+<html lang="en" >
+<!-- 
+project name:weather app
+author: ezhilan gunasekaran
+
+-->
+   <head>
+      <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc5/angular-material.min.css">
+      
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
+      <link href="style.css" rel="stylesheet">
+      <!-- Angular Material requires Angular.js Libraries -->
+<script src="node_modules/angular/angular.min.js"></script>
+<script src="node_modules/angular-animate/angular-animate.min.js"></script>
+<script src="node_modules/angular-aria/angular-aria.min.js"></script>
+<script src="node_modules/angular-messages/angular-messages.min.js"></script>
+<script src="node_modules/svg-assets-cache.js"></script>
+ 
+<!-- Angular Material Library -->
+<script src="node_modules/angular-material/angular-material.min.js"></script>
+<script src="app.js"></script>
+
+   </head>
+   <body ng-controller="openWeather" ng-app="myApp">
+    <canvas id="canvas"></canvas>
+ <md-toolbar class="mobile">
+    <div class="md-toolbar-tools" data-ng-hide="showMobileMainHeader">
+        <md-button class="md-icon-button" aria-label="Icon">
+           <i class="material-icons">wb_cloudy</i>
+        </md-button>
+        <h2>
+          <span>Weather information</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Search" data-ng-click="showMobileMainHeader = true">
+          <md-tooltip>Search</md-tooltip>
+          <md-icon class="material-icons">&#xE8B6;</md-icon>
+        </md-button>
+      </div>
+      <div class="md-toolbar-tools" data-ng-show="showMobileMainHeader">
+        <md-button class="md-icon-button" aria-label="Back" data-ng-click="showMobileMainHeader = false">
+          <md-tooltip>Back</md-tooltip>
+          <md-icon class="material-icons">&#xE5C4;</md-icon>
+        </md-button>
+        <md-input-container md-no-float class="md-accent" style="padding-bottom:0px;" >
+        <form ng-submit="city()">
+           <input ng-model="citval" placeholder="Enter the city name" style="color:#fff;">
+        </form>
+        </md-input-container>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Search" data-ng-click="city()">
+          <md-tooltip>Search</md-tooltip>
+          <md-icon class="material-icons">&#xE163;</md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-content>
+<div layout="row" class="wea-layout" layout-wrap>
+
+
+<div class="weamain"layout="column" layout-align="space-around center">
+  <div>{{myWeather.city.name}}, {{myWeather.city.country}}</div>
+  <div>{{myWeather.list[0].temp.day | number:0 }}<sup class="deg">&deg;</sup>F</div>
+  <div>{{myWeather.list[0].weather[0].description}}</div>
+</div>
+
+</div>
+
+<md-grid-list
+       md-cols="7" md-cols-xs="1"  
+         md-row-height-xs="50px" md-row-height="150px"
+        md-gutter="10px" md-gutter-sm="3px" md-gutter-xs="3px" md-gutter-gt-sm="7px" class="gridListdemoBasicUsage">
+    <md-grid-tile ng-repeat="wDetail in myWeather.list" md-ink-ripple="#fff">
+<div class="wealist" layout-sm="row" layout="column" layout-align="space-around center">
+  <div>{{Day[$index]}}<br><span>{{Month[$index]}} {{Date[$index]}}</span></div>
+  <div><img src="{{icon[$index]}}"></div>
+  <div>{{wDetail.temp.max | number:0}}<sup class="deg">&deg;</sup>F / {{wDetail.temp.min | number:0}}<sup class="deg">&deg;</sup>F</div>
+  <div>{{wDetail.weather[0].description}}</div>
+</div>
+    </md-grid-tile>
+</md-grid-list>
+</md-content>
+   </body>
+</html>
