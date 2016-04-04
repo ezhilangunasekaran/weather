@@ -105,7 +105,4 @@ canvas {
   .gridListdemoBasicUsage .wealist div:nth-child(1) {
     font-size:16px;
 }
-.gridListdemoBasicUsage md-grid-tile:hover{
-    transform:scale(1.1);
-   }
 }
